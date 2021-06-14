@@ -1,0 +1,13 @@
+---
+- name: Install firewall
+  apt:
+    name: ufw
+    state: latest
+
+- name: Apply firewall rules
+  ufw:
+    state: enabled
+    policy: allow
+
+- name: Enable firewall
+  command: ufw --force enable

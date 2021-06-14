@@ -1,0 +1,13 @@
+---
+- name: Installation of haproxy on load balancer
+  apt: name=haproxy state=latest
+
+- name: Enable haproxy
+  lineinfile: dest=/etc/default/haproxy regexp="^ENABLED" line="ENABLED=1"
+  notify: restart haproxy
+
+- name: Copy and replace haproxy config
+  copy:
+     src: templates/haproxy.cfg.j2
+     dest: /etc/haproxy/haproxy.cfg
+  notify: restart haproxy
